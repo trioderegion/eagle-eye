@@ -36,8 +36,8 @@ export class MODULE {
 
       if (debug) {
         //GlobalTesting (adds all imports to global scope)
-        Object.entries(this.SUB_MODULES).forEach(([key, cl])=> window[key] = cl);
-        Object.entries(this.SUB_APPS).forEach(([key, cl])=> window[key] = cl);
+//        Object.entries(this.SUB_MODULES).forEach(([key, cl])=> window[key] = cl);
+//        Object.entries(this.SUB_APPS).forEach(([key, cl])=> window[key] = cl);
       }
     });
   }

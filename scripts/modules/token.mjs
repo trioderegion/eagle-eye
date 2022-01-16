@@ -13,42 +13,27 @@ export class EagleEyeToken {
 
     const superFn = {
       isVisible: {
-        property: {
-          get: this.isVisible
-        }
+        get: this.isVisible
       },
       updateVisionSource: {
-        target: 'prototype.updateVisionSource',
-        override: this.updateVisionSource
+        value: this.updateVisionSource
       }
     }
 
-    Object.entries(superFn).forEach( ([fn, {target, override, property}]) => {
+    Object.entries(superFn).forEach( ([fn, override]) => {
 
-      if(property) {
-        const original = Object.getOwnPropertyDescriptor(Token.prototype, fn)
+      /* get the current version */
+      const original = Object.getOwnPropertyDescriptor(Token.prototype, fn)
+
+      /* if our copy already has a value here, we dont want to overwrite */
+      if ( !Object.hasOwn(this._super, fn) ){ 
         Object.defineProperty(this._super, fn, original);
-        Object.defineProperty(Token.prototype, fn, mergeObject(original, property));
       }
 
-      if(override) {
-        /* save off current method */
-        this._super[fn] = getProperty(Token, target)
-
-        /* insert our own */
-        setProperty(
-          Token,
-          target,
-          function(...args){ return override.call(this, ...args)}
-        );
-      }
+      /* set the replacement function */
+      Object.defineProperty(Token.prototype, fn, mergeObject(original, override));
 
     })
-
-    
-
-    //const proxy = new Proxy(Token.prototype.isVisible, handler);
-
   }
 
 
