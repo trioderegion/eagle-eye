@@ -2,50 +2,53 @@
 /**
  * Main Module Organizational Tools
  */
-//import { MyLogger } from './my-logger.js';
+import { logger } from './logger.mjs';
+import { CONFIG } from './config.mjs'
+import { EagleEyeToken } from './modules/token.mjs'
 
-/**
- * Sub Modules
- */
-//import { MyClass } from './modules/my-class.js'
-
-/**
- * Sub Apps
- */
-//import { MyDialog } from './apps/my-dialog.js';
-
-const SUB_MODULES = {
-  //MyLogger,
-  //MyClass
-};
-
-const SUB_APPS = {
-  //MyDialog  
-}
-
-/*
-  Initialize Module
-*/
-MODULE.build();
-
-/*
-  Initialize all Sub Modules
-*/
-Hooks.on(`setup`, () => {
-
-  Object.values(SUB_MODULES).forEach(cl => cl.register());
-
-  //GlobalTesting (adds all imports to global scope)
-  //Object.entries(SUB_MODULES).forEach(([key, cl])=> window[key] = cl);
-  //Object.entries(SUB_APPS).forEach(([key, cl])=> window[key] = cl);
-});
 
 export class MODULE {
 
-  static build() {
-    //all startup tasks needed before sub module initialization
+  static SUB_MODULES = {
+    logger,
+    CONFIG,
+    EagleEyeToken,
+  }
+
+  static SUB_APPS = {
+
+  }
+
+  static build({debug = false} = {}) {
+
+    /* all startup tasks needed before sub module initialization */
+
+    /* sub module init */
+    this._initModules(debug);
+  }
+
+  static _initModules({debug = false} = {}) {
+
+    /* Initialize all Sub Modules on setup */
+    Hooks.on(`setup`, () => {
+
+      Object.values(this.SUB_MODULES).forEach(cl => cl.register());
+
+      if (debug) {
+        //GlobalTesting (adds all imports to global scope)
+        Object.entries(this.SUB_MODULES).forEach(([key, cl])=> window[key] = cl);
+        Object.entries(this.SUB_APPS).forEach(([key, cl])=> window[key] = cl);
+      }
+    });
+  }
+
+  /* --------------- */
+  static localize(...args) {
+    return game.i18n.format(...args);
   }
 }
+
+MODULE.build();
 
 /*****Example Sub-Module Class******
 
