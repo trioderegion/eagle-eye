@@ -1,9 +1,9 @@
 {
-    "name": "fvtt-dual-track-module",
-    "title": "FVTT Dual-Track Module Template",
-    "description": "A template repository.",
+    "name": "eagle-eye",
+    "title": "Eagle Eye",
+    "description": "",
     "system": [],
-    "version": "test-pr-1",
+    "version": "0.1.0",
     "author": "",
     "authors": [],
     "esmodules": [
@@ -14,7 +14,7 @@
     "socket": false,
     "url": "https://github.com/trioderegion/eagle-eye",
     "manifest": "https://raw.githubusercontent.com/trioderegion/eagle-eye/next/module.json",
-    "download": "https://github.com/trioderegion/eagle-eye/releases/download/test-pr-1/module.zip",
+    "download": "https://github.com/trioderegion/eagle-eye/releases/download/0.1.0/module.zip",
     "minimumCoreVersion": "9",
     "compatibleCoreVersion": "9"
 }
