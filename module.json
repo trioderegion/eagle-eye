@@ -19,5 +19,11 @@
     "manifest": "",
     "download": "",
     "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9"
+    "compatibleCoreVersion": "9",
+    "dependencies": [
+        {
+            "name": "lib-wrapper",
+            "type": "module"
+        }
+    ]
 }
