@@ -14,11 +14,8 @@ export class EagleEyeToken {
     const superFn = {
       isVisible: {
         get: this.isVisible
-      },
-      updateVisionSource: {
-        value: this.updateVisionSource
       }
-    }
+    };
 
     Object.entries(superFn).forEach( ([fn, override]) => {
 
@@ -33,7 +30,14 @@ export class EagleEyeToken {
       /* set the replacement function */
       Object.defineProperty(Token.prototype, fn, mergeObject(original, override));
 
-    })
+    });
+
+    libWrapper.register(
+      "eagle-eye",
+      "Token.prototype.updateVisionSource",
+      EagleEyeToken.updateVisionSource,
+      "OVERRIDE"
+    )
   }
 
 
@@ -47,7 +51,7 @@ export class EagleEyeToken {
       canvas.sight.sources.has(this.sourceId+"_3") ||
       canvas.sight.sources.has(this.sourceId+"_4")  ) return true;
 
-    const tolerance = canvas.grid.size / 2
+    const tolerance = canvas.grid.size / 2;
 
     return canvas.sight.testVisibility(this.center, {tolerance, object: this});
   }
