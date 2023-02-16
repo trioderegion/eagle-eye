@@ -109,9 +109,9 @@ export class EagleEyeToken {
     } 
 
     // Schedule a perception update
-    if ( !defer && (isVisionSource || deleted) ) canvas.perception.schedule({
-      sight: {refresh: true, skipUpdateFog}
-    });
+    if ( !defer && (isVisionSource || deleted) ) canvas.perception.update({
+      refreshVision: true
+    }, true);
   }
 }
 
