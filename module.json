@@ -16,13 +16,12 @@
         ]
     },
     "version": "#{VERSION}#",
-    "author": "",
     "authors": [
         {
-            "id": "trioderegion"
+            "name": "trioderegion"
         },
         {
-            "id": "lparkjordan"
+            "name": "lparkjordan"
         }
     ],
     "esmodules": [
