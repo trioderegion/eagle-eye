@@ -47,7 +47,7 @@ export class EagleEyeToken {
       canvas.effects.visionSources.has(this.sourceId+"_3") ||
       canvas.effects.visionSources.has(this.sourceId+"_4")  ) return true;
 
-    const tolerance = canvas.grid.size / 2
+    const tolerance = (canvas.grid.size / 2) - 2;
 
     return canvas.effects.visibility.testVisibility(this.center, {tolerance, object: this});
   }
