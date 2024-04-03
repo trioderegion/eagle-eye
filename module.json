@@ -18,6 +18,12 @@
     "version": "1.1.1",
     "author": "",
     "authors": [
+        {
+            "id": "trioderegion"
+        }
+        {
+            "id": "lparkjordan"
+        }
     ],
     "esmodules": [
         "scripts/module.mjs"
@@ -27,8 +33,8 @@
     "styles": [
     ],
     "socket": false,
-    "url": "",
-    "manifest": "",
+    "url": "https://github.com/lparkjordan/eagle-eye",
+    "manifest": "https://raw.githubusercontent.com/lparkjordan/eagle-eye/master/module.json",
     "download": "",
     "compatibility": {
         "minimum": "10",
