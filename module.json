@@ -15,7 +15,7 @@
             }
         ]
     },
-    "version": "1.1.1",
+    "version": "#{VERSION}#",
     "author": "",
     "authors": [
         {
@@ -33,9 +33,9 @@
     "styles": [
     ],
     "socket": false,
-    "url": "https://github.com/lparkjordan/eagle-eye",
-    "manifest": "https://raw.githubusercontent.com/lparkjordan/eagle-eye/master/module.json",
-    "download": "",
+    "url": "#{URL}#",
+    "manifest": "#{MANIFEST}#",
+    "download": "#{DOWNLOAD}#",
     "compatibility": {
         "minimum": "10",
         "verified": "11.315"
