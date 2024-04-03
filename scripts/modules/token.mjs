@@ -53,9 +53,9 @@ export class EagleEyeToken {
   }
 
   static updateVisionSource({defer=false, deleted=false, skipUpdateFog=false}={}) {
-    if(!this.vision2) this.vision2 = new VisionSource(this);
-    if(!this.vision3) this.vision3 = new VisionSource(this);
-    if(!this.vision4) this.vision4 = new VisionSource(this);
+    if(!this.vision2) this.vision2 = new VisionSource({object: this});
+    if(!this.vision3) this.vision3 = new VisionSource({object: this});
+    if(!this.vision4) this.vision4 = new VisionSource({object: this});
     // Prepare data
 
     const sourceId = this.sourceId;
