@@ -1,11 +1,29 @@
 {
-    "name": "eagle-eye",
+    "id": "eagle-eye",
     "title": "Eagle Eye",
-    "description": "",
-    "system": [],
-    "version": "1.1.0",
+    "description": "A module which moves token vision to the four corners of the token.",
+    "relationships": {
+        "systems": [
+            {
+                "id": "dnd5e",
+                "type": "system",
+                "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+                "compatibility": {
+                    "minimum": "3.1.0",
+                    "verified": "3.1.0"
+                }
+            }
+        ]
+    },
+    "version": "1.1.1",
     "author": "",
     "authors": [
+        {
+            "id": "trioderegion"
+        }
+        {
+            "id": "lparkjordan"
+        }
     ],
     "esmodules": [
         "scripts/module.mjs"
@@ -15,11 +33,11 @@
     "styles": [
     ],
     "socket": false,
-    "url": "",
-    "manifest": "",
+    "url": "https://github.com/lparkjordan/eagle-eye",
+    "manifest": "https://raw.githubusercontent.com/lparkjordan/eagle-eye/master/module.json",
     "download": "",
     "compatibility": {
         "minimum": "10",
-        "verified": "10.291"
+        "verified": "11.315"
     }
 }
