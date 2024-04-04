@@ -39,23 +39,23 @@ export class EagleEyeToken {
 
   static isVisible() {
     const gm = game.user.isGM;
-    if ( this.data.hidden ) return gm;
-    if ( !canvas.sight.tokenVision ) return true;
+    if ( this.document.hidden ) return gm;
+    if ( !canvas.effects.visibility.tokenVision ) return true;
     if ( this._controlled ) return true;
-    if ( canvas.sight.sources.has(this.sourceId) ||
-      canvas.sight.sources.has(this.sourceId+"_2") ||
-      canvas.sight.sources.has(this.sourceId+"_3") ||
-      canvas.sight.sources.has(this.sourceId+"_4")  ) return true;
+    if ( canvas.effects.visionSources.has(this.sourceId) ||
+      canvas.effects.visionSources.has(this.sourceId+"_2") ||
+      canvas.effects.visionSources.has(this.sourceId+"_3") ||
+      canvas.effects.visionSources.has(this.sourceId+"_4")  ) return true;
 
-    const tolerance = canvas.grid.size / 2
+    const tolerance = (canvas.grid.size / 2) - 2;
 
-    return canvas.sight.testVisibility(this.center, {tolerance, object: this});
+    return canvas.effects.visibility.testVisibility(this.center, {tolerance, object: this});
   }
 
   static updateVisionSource({defer=false, deleted=false, skipUpdateFog=false}={}) {
-    if(!this.vision2) this.vision2 = new VisionSource(this);
-    if(!this.vision3) this.vision3 = new VisionSource(this);
-    if(!this.vision4) this.vision4 = new VisionSource(this);
+    if(!this.vision2) this.vision2 = new VisionSource({object: this});
+    if(!this.vision3) this.vision3 = new VisionSource({object: this});
+    if(!this.vision4) this.vision4 = new VisionSource({object: this});
     // Prepare data
 
     const sourceId = this.sourceId;
@@ -67,55 +67,87 @@ export class EagleEyeToken {
       this.vision.initialize({
         x: this.x + 2,
         y: this.y + 2,
-        dim: Math.clamped(this.getLightRadius(this.data.dimSight), 0, d.maxR),
-        bright: Math.clamped(this.getLightRadius(this.data.brightSight), 0, d.maxR),
-        angle: this.data.sightAngle,
-        rotation: this.data.rotation
+        radius: Math.clamped(this.getLightRadius(this.document.sight.range), 0, d.maxR),
+        externalRadius: this.externalRadius,
+        angle: this.document.sight.angle,
+        rotation: this.document.rotation,
+        disabled: !this.document.sight.enabled,
+        color: this.document.sight.color,
+        contrast: this.document.sight.contrast,
+        attenuation: this.document.sight.attenuation,
+        saturation: this.document.sight.saturation,
+        brightness: this.document.sight.brightness,
+        visionMode: this.document.sight.visionMode,
+        blinded: this.actor.statuses.has('blinded')
       });
-      canvas.sight.sources.set(sourceId, this.vision);
+      canvas.effects.visionSources.set(sourceId, this.vision);
 
       this.vision2.initialize({
         x: this.x + this.w - 2,
         y: this.y + 2,
-        dim: Math.clamped(this.getLightRadius(this.data.dimSight), 0, d.maxR),
-        bright: Math.clamped(this.getLightRadius(this.data.brightSight), 0, d.maxR),
-        angle: this.data.sightAngle,
-        rotation: this.data.rotation
+        radius: Math.clamped(this.getLightRadius(this.document.sight.range), 0, d.maxR),
+        externalRadius: this.externalRadius,
+        angle: this.document.sight.angle,
+        rotation: this.document.rotation,
+        disabled: !this.document.sight.enabled,
+        color: this.document.sight.color,
+        contrast: this.document.sight.contrast,
+        attenuation: this.document.sight.attenuation,
+        saturation: this.document.sight.saturation,
+        brightness: this.document.sight.brightness,
+        visionMode: this.document.sight.visionMode,
+        blinded: this.actor.statuses.has('blinded')
       });
-      canvas.sight.sources.set(sourceId+"_2", this.vision2);
+      canvas.effects.visionSources.set(sourceId+"_2", this.vision2);
 
       this.vision3.initialize({
         x: this.x + this.w - 2,
         y: this.y + this.h - 2,
-        dim: Math.clamped(this.getLightRadius(this.data.dimSight), 0, d.maxR),
-        bright: Math.clamped(this.getLightRadius(this.data.brightSight), 0, d.maxR),
-        angle: this.data.sightAngle,
-        rotation: this.data.rotation
+        radius: Math.clamped(this.getLightRadius(this.document.sight.range), 0, d.maxR),
+        externalRadius: this.externalRadius,
+        angle: this.document.sight.angle,
+        rotation: this.document.rotation,
+        disabled: !this.document.sight.enabled,
+        color: this.document.sight.color,
+        contrast: this.document.sight.contrast,
+        attenuation: this.document.sight.attenuation,
+        saturation: this.document.sight.saturation,
+        brightness: this.document.sight.brightness,
+        visionMode: this.document.sight.visionMode,
+        blinded: this.actor.statuses.has('blinded')
       });
-      canvas.sight.sources.set(sourceId+"_3", this.vision3);
+      canvas.effects.visionSources.set(sourceId+"_3", this.vision3);
 
       this.vision4.initialize({
         x: this.x + 2,
         y: this.y + this.h - 2,
-        dim: Math.clamped(this.getLightRadius(this.data.dimSight), 0, d.maxR),
-        bright: Math.clamped(this.getLightRadius(this.data.brightSight), 0, d.maxR),
-        angle: this.data.sightAngle,
-        rotation: this.data.rotation
+        radius: Math.clamped(this.getLightRadius(this.document.sight.range), 0, d.maxR),
+        externalRadius: this.externalRadius,
+        angle: this.document.sight.angle,
+        rotation: this.document.rotation,
+        disabled: !this.document.sight.enabled,
+        color: this.document.sight.color,
+        contrast: this.document.sight.contrast,
+        attenuation: this.document.sight.attenuation,
+        saturation: this.document.sight.saturation,
+        brightness: this.document.sight.brightness,
+        visionMode: this.document.sight.visionMode,
+        blinded: this.actor.statuses.has('blinded')
       });
-      canvas.sight.sources.set(sourceId+"_4", this.vision4);
+      canvas.effects.visionSources.set(sourceId+"_4", this.vision4);
     }
     // Remove vision source
     else {
-      canvas.sight.sources.delete(sourceId);
-      canvas.sight.sources.delete(sourceId+"_2");
-      canvas.sight.sources.delete(sourceId+"_3");
-      canvas.sight.sources.delete(sourceId+"_4");
+      canvas.effects.visionSources.delete(sourceId);
+      canvas.effects.visionSources.delete(sourceId+"_2");
+      canvas.effects.visionSources.delete(sourceId+"_3");
+      canvas.effects.visionSources.delete(sourceId+"_4");
     } 
 
     // Schedule a perception update
-    if ( !defer && (isVisionSource || deleted) ) canvas.perception.schedule({
-      sight: {refresh: true, skipUpdateFog}
-    });
+    if ( !defer && (isVisionSource || deleted) ) canvas.perception.update({
+      refreshVision: true
+    }, true);
   }
 }
 
